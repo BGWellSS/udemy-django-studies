@@ -5,5 +5,5 @@ from receitas.views import contato, index, sobre
 urlpatterns = [
     path('', index, name='index'),
     path('sobre/', sobre, name='sobre'),
-    path('contato/', contato, name='sobre'),
+    path('contato/', contato, name='contato'),
 ]
