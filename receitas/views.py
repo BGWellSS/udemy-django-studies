@@ -10,8 +10,7 @@ def index(request):
 
 
 def contato(request):
-    # return render(request, 'receitas/contato.html')
-    return render(request, 'sera_apagado/template_temporario.html')
+    return render(request, 'receitas/contato.html')
 
 
 def sobre(request):
