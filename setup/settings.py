@@ -67,6 +67,8 @@ TEMPLATES = [
             # BASE_DIR / 'templates',
             # os.path.join(BASE_DIR, 'templates'),
             BASE_DIR / 'base',
+            # Outro exemplo
+            BASE_DIR / 'receitas' / 'outro_template_dir',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
