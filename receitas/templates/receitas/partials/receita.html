@@ -63,7 +63,11 @@
 
   {% if tag_detalhe is True %}
     <div class="preparation-steps">
-      {{receita.modo_preparo|linebreaksbr}}
+      {% if receita.modo_preparo_e_html is True %}
+        {{receita.modo_preparo|safe}}
+      {% else %}
+        {{receita.modo_preparo|linebreaksbr}}
+      {% endif %}
     </div>
   {% endif %}
 

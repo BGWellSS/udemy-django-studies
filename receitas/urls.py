@@ -1,8 +1,7 @@
 from django.urls import path
 
-from receitas.apps import ReceitasConfig
-
 from . import views
+from .apps import ReceitasConfig
 
 app_name = ReceitasConfig.name
 

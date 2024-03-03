@@ -57,6 +57,9 @@ body {
   font-family: var(--font-primary);
   background: var(--color-gray-1);
   color: var(--color-dark-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 h1,
@@ -135,6 +138,12 @@ h6 {
 
 .search-form:focus-within .search-button {
   color: var(--color-primary);
+}
+
+.main-content-container {
+  display: flex;
+  flex: 1;
+  flex-grow: 1;
 }
 
 .main-content {
@@ -272,4 +281,13 @@ h6 {
 
 .main-footer a:hover {
   filter: brightness(.8);
+}
+
+.status-404 {
+  display: flex;
+  flex: 1;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
