@@ -66,7 +66,7 @@ TEMPLATES = [
             # Formas de adicionar o diretório templates
             # BASE_DIR / 'templates',
             # os.path.join(BASE_DIR, 'templates'),
-            BASE_DIR / 'templates',
+            BASE_DIR / 'base_templates',
             # Outro exemplo
             # BASE_DIR / 'receitas' / 'outro_template_dir',
         ],
@@ -135,8 +135,10 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / 'base_static',
 ]
+
+STATIC_ROOT = BASE_DIR / 'static'
 
 '''
 # Estas configurações são necessárias para o Django encontrar os arquivos estáticos
