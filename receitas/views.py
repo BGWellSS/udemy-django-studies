@@ -64,3 +64,18 @@ def categoria(request, categoria_id):
         'receitas': receitas,
         'titulo': f'Categoria - {categoria_nome}',
     }, status=200)
+
+
+def busca(request):
+    termo = request.GET.get('q')
+
+    if termo:
+        receitas = Receita.objects.filter(publicada=True, titulo__icontains=termo).order_by('-id')
+    else:
+        receitas = None
+
+    return render(request, 'receitas/pages/busca.html', context={
+        'receitas': receitas,
+        'titulo': f'Busca - {termo}',
+        'termo': termo if termo else '🤔 Campo vazio ❌',
+    }, status=200)

@@ -140,6 +140,23 @@ h6 {
   color: var(--color-primary);
 }
 
+.empty-search-container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.term-search {
+  margin-top: 2rem;
+  padding: var(--spacing-gutter-medium);
+  font-size: 2rem;
+  background-color: var(--color-primary-dark-hover);
+  color: var(--color-white);
+  border-radius: 1.5rem;
+}
+
 .main-content-container {
   display: flex;
   flex: 1;
@@ -302,9 +319,7 @@ h6 {
 
 .status-404 {
   display: flex;
-  flex: 1;
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
-  height: 100%;
 }
