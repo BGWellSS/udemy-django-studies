@@ -202,4 +202,3 @@ __localcode
 .DS_Store
 _local_settings.py
 gunicorn-error-log
-static/
