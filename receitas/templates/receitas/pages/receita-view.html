@@ -1,15 +1,11 @@
-{% include "receitas/partials/head.html" %}
+{% extends "receitas/base.html" %}
 
-<body>
-  {% include "receitas/partials/header.html" %}
-  {% include "receitas/partials/pesquisa.html" %}
+{% block titulo %}{{nome_receita}} {% endblock titulo %}
 
+{% block conteudo %}
   <main class="main-content-container">
     <div class="main-content main-content-detail container">
       {% include "receitas/partials/receita.html" %}
     </div>
   </main>
-  {% include 'receitas/partials/footer.html' %}
-</body>
-
-</html>
+{% endblock conteudo %}
