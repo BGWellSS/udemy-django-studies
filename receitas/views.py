@@ -1,4 +1,5 @@
 # from django.http import Http404
+from django.db.models import Q
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 
 from .models import Receita
@@ -70,7 +71,11 @@ def busca(request):
     termo = request.GET.get('q', '').strip()
 
     if termo:
-        receitas = Receita.objects.filter(publicada=True, titulo__icontains=termo).order_by('-id')
+        receitas = Receita.objects.filter(
+            Q(
+                Q(titulo__icontains=termo) |
+                Q(descricao__icontains=termo)
+            ), publicada=True).order_by('-id')
     else:
         receitas = None
 
