@@ -10,4 +10,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     # https://docs.djangoproject.com/pt-br/5.0/topics/http/urls/
     path('receita/<int:id>/', views.receita, name='receita'),
+    path('receita/categoria/<int:categoria_id>/', views.categoria, name='categoria'),
 ]

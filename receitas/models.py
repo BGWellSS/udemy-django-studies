@@ -40,8 +40,8 @@ class Receita(models.Model):
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
     publicada = models.BooleanField(default=False)
-    imagem_cover = models.ImageField(upload_to='receitas/covers/%Y/%m/%d/')
-    categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
+    imagem_cover = models.ImageField(upload_to='receitas/covers/%Y/%m/%d/', blank=True, default='')
+    categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True, blank=True, default=None)
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
