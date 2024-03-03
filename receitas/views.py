@@ -3,6 +3,8 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 
+from utils.paginacao import fazer_escala_paginacao
+
 from .models import Receita
 
 # from utils.receitas.gerador import fazer_receita
@@ -12,12 +14,18 @@ from .models import Receita
 def index(request):
     receitas = Receita.objects.filter(publicada=True).order_by('-id')
 
-    pagina_atual = request.GET.get('page', 1)
+    try:
+        pagina_atual = int(request.GET.get('page', 1))
+    except ValueError:
+        pagina_atual = 1
     paginador = Paginator(receitas, 12)
     pagina = paginador.get_page(pagina_atual)
 
+    escala_paginacao = fazer_escala_paginacao(paginador.page_range, 10, pagina_atual)
+
     return render(request, 'receitas/pages/index.html', context={
         'receitas': pagina,
+        'escala_paginacao': escala_paginacao,
     }, status=200)
 
 
