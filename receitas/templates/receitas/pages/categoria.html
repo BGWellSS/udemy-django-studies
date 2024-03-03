@@ -3,12 +3,10 @@
 {% block titulo %}{{titulo}}{% endblock titulo %}
 
 {% block conteudo %}
-  <main class="main-content-container">
-    <div class="main-content main-content-list container">
-      {% for receita in receitas %}
-        {% include "receitas/partials/receita.html" %}
-      {% endfor %}
-    </div>
-  </main>
+  <div class="main-content main-content-list container">
+    {% for receita in receitas %}
+      {% include "receitas/partials/receita.html" %}
+    {% endfor %}
+  </div>
 {% endblock conteudo %}
  
