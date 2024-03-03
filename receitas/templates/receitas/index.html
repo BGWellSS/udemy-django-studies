@@ -1,12 +1,16 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Receitas - Home</title>
-</head>
+{% include "receitas/partials/head.html" %}
+
 <body>
-  <h1>Receitas - HOME</h1>
-  <h2>O template recebeu o nome da receita de : {{nome_receita}}</h2>
+  <header class="main-header-container">
+    <div class="main-header container">
+      <h1>
+        <a class="main-logo" href="/">
+          <i class="fas fa-utensils main-logo-icon"></i>
+          <span  class="main-logo-text">Recipes</span>
+        </a>
+      </h1>
+    </div>
+  </header>
 </body>
+
 </html>
