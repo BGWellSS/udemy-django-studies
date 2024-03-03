@@ -30,7 +30,7 @@ class Categoria(models.Model):
 class Receita(models.Model):
     titulo = models.CharField(max_length=65)
     descricao = models.TextField(max_length=165)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True, max_length=65)
     tempo_preparo = models.IntegerField()
     tempo_preparo_unidade = models.CharField(max_length=65)
     qtd_porcoes = models.IntegerField()
