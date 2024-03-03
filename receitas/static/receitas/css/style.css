@@ -248,7 +248,7 @@ h6 {
   filter: brightness(2);
 }
 
-.main-content-detail  .recipe-list-item {
+.main-content-detail .recipe-list-item {
   max-width: 84rem;
   margin: 0 auto;
 }
@@ -262,6 +262,23 @@ h6 {
   padding: var(--spacing-gutter-medium);
   padding-top: 4rem;
   text-align: justify;
+}
+
+.preparation-steps h1,
+.preparation-steps h2,
+.preparation-steps h3,
+.preparation-steps h4,
+.preparation-steps h5,
+.preparation-steps h6,
+.preparation-steps p,
+.preparation-steps pre {
+  margin: 2rem 0;
+}
+
+.preparation-steps ol,
+.preparation-steps ul {
+  margin: 2rem;
+  padding: 0 2rem;
 }
 
 .main-footer {
