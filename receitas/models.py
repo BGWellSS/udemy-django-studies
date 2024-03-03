@@ -1,6 +1,22 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+'''
+    O Django fornece um conjunto de classes que facilitam a criação de modelos de banco de dados.
+    Uma classe Model é a base para todos os modelos de banco de dados no Django.
+        ela define um modelo de banco de dados com campos e comportamentos.
+        
+    Cada modelo é uma classe que herda de django.db.models.Model.
+    Cada atributo da classe do modelo representa um campo de banco de dados.
+        Cada atributo tem um tipo de dado específico.
+    Cada 'linha' do banco de dados é representado por uma instância de uma classe do modelo.
+
+    O Django fornece uma variedade de tipos de campo de banco de dados.
+        https://docs.djangoproject.com/pt-br/5.0/ref/models/fields/
+'''
+
+# Create your models here.
+
 
 class Categoria(models.Model):
     nome = models.CharField(max_length=100)
@@ -9,8 +25,6 @@ class Categoria(models.Model):
 
     def __str__(self):
         return self.nome
-
-# Create your models here.
 
 
 class Receita(models.Model):
