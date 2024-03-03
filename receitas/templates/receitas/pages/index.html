@@ -6,6 +6,8 @@
   <div class="main-content main-content-list container">
     {% for receita in receitas %}
       {% include "receitas/partials/receita.html" %}
+    {% empty %}
+      <h1 class='status-404'>NÃO EXISTEM RECEITAS PUBLICADAS NO MOMENTO</h1>
     {% endfor %}
   </div>
 {% endblock conteudo %}

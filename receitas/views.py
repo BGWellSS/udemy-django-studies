@@ -21,7 +21,6 @@ def receita(request, id):
     if not receita:
         return render(request, 'receitas/pages/404.html', context={
             'titulo': f'Receita - Não encontrada.',
-            'is_status404': True,
         }, status=404)
 
     return render(request, 'receitas/pages/receita-view.html', context={
