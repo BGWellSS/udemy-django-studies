@@ -67,7 +67,7 @@ def categoria(request, categoria_id):
 
 
 def busca(request):
-    termo = request.GET.get('q')
+    termo = request.GET.get('q', '').strip()
 
     if termo:
         receitas = Receita.objects.filter(publicada=True, titulo__icontains=termo).order_by('-id')
