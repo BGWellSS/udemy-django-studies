@@ -1,4 +1,5 @@
 # from django.http import Http404
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 
@@ -11,8 +12,12 @@ from .models import Receita
 def index(request):
     receitas = Receita.objects.filter(publicada=True).order_by('-id')
 
+    pagina_atual = request.GET.get('page', 1)
+    paginador = Paginator(receitas, 12)
+    pagina = paginador.get_page(pagina_atual)
+
     return render(request, 'receitas/pages/index.html', context={
-        'receitas': receitas,
+        'receitas': pagina,
     }, status=200)
 
 
