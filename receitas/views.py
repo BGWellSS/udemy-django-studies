@@ -1,6 +1,7 @@
 # from django.http import Http404
 import os
 
+from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import render
 
@@ -19,6 +20,8 @@ def index(request):
     receitas = Receita.objects.filter(publicada=True).order_by('-id')
 
     pagina, escala_paginacao = fazer_paginacao(request, receitas, QTD_POR_PAGINA, NUMERO_PAGINACAO)
+
+    messages.info(request, 'Mensagem de teste.')
 
     return render(request, 'receitas/pages/index.html', context={
         'receitas': pagina,

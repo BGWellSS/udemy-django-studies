@@ -3,6 +3,9 @@
 {% block titulo %}Home{% endblock titulo %}
 
 {% block conteudo %}
+
+  {% include "receitas/partials/mensagem.html" %}
+
   <div class="main-content main-content-list container">
     {% for receita in receitas %}
       {% include "receitas/partials/receita.html" %}
