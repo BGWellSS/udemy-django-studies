@@ -2,18 +2,16 @@
 <html lang="pt-BR">
 
 <head>
-  {% include "receitas/partials/head.html" %}
+  {% include "autores/partials/head.html" %}
   <title>{% block titulo %}{% endblock titulo %}</title>
 </head>
 
 <body>
-  {% include "receitas/partials/header.html" %}
-  {% include "receitas/partials/pesquisa.html" %}
+  {% include "autores/partials/header.html" %}
   <main class="main-content-container">
     {% block conteudo %}{% endblock conteudo %}
-    {% include "receitas/partials/paginacao.html" %}
   </main>
-  {% include 'receitas/partials/footer.html' %}
+  {% include 'autores/partials/footer.html' %}
 </body>
 
 </html>
