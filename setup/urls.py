@@ -22,6 +22,7 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('receitas.urls')),
+    path('autores/', include('autores.urls')),
 ]
 
 # Configurações para servir arquivos estáticos e de mídia durante o desenvolvimento
