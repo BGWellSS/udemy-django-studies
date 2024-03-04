@@ -7,6 +7,7 @@ Repositório de estudo do Curso "Aprenda Django Web Framework e Django Rest Fram
 - [Instalação](#instalação)
 - [Configuração](#configuração)
 - [Uso](#uso)
+- [Util](#util)
 
 ## Instalação
 
@@ -122,3 +123,19 @@ python manage.py runserver
 ### Painel de administração
 
 <http://127.0.0.1:8000/admin>
+
+## Util
+
+Comandos uteis durante o desenvolvimento
+
+### Duplicar receitas
+
+```ps
+py .\manage.py shell
+```
+
+```shell
+from receitas.models import Receita
+r = Receita.objects.get(pk=1)
+for i in range(100): r.id = None; r.titulo = f'Foi duplicado {i}'; r.slug = f'foi-duplicado-{i}'; r.save();
+```
