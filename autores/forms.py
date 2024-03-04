@@ -61,7 +61,7 @@ class CadastroForm(forms.ModelForm):
     username = forms.CharField(
         label='Usuário',
         help_text=(
-            'O nome de usuário deve conter apenas letras, números ou esses caracteres @ . + - _'
+            'Dica: O nome de usuário deve conter apenas letras, números ou esses caracteres @ . + - _'
             '. O comprimento deve estar entre 4 e 150 caracteres.'
         ),
         error_messages={
@@ -181,6 +181,17 @@ class CadastroForm(forms.ModelForm):
 
         return data
     """
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email', '')
+        exists = User.objects.filter(email=email).exists()
+
+        if exists:
+            raise ValidationError(
+                'O e-mail já foi utilizado', code='invalid',
+            )
+
+        return email
 
     def clean(self):
         cleaned_data = super().clean()
