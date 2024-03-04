@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from .forms import CadastroForm
 
@@ -12,12 +12,23 @@ def index(request):
 
 def cadastro(request):
 
-    if request.POST:
-        formulario = CadastroForm(request.POST)
-    else:
-        formulario = CadastroForm()
+    dados_formulario_cadastro = request.session.get('dados_formulario_cadastro', None)
+
+    formulario = CadastroForm(dados_formulario_cadastro)
 
     return render(request, 'autores/pages/cadastro.html', context={
         'titulo': 'Autores - Cadastro',
-        'formulario': formulario
+        'formulario': formulario,
     }, status=200)
+
+
+def cadastro_validacao(request):
+
+    if not request.POST:
+        return redirect('autores:index')
+
+    POST = request.POST
+    request.session['dados_formulario_cadastro'] = POST
+    formulario = CadastroForm(POST)
+
+    return redirect('autores:cadastro')

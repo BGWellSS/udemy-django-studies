@@ -5,12 +5,13 @@
 {% block conteudo %}
   <div class="main-content container">
     <h2>{{ titulo }}</h2>
+    <h2>Número de acessos: {{ request.session.acessos }}</h2>
   </div>
   <div class="main-content container">
-    <form action="" method="POST">
+    <form action="{% url 'autores:validacao' %}" method="POST">
 
       {% csrf_token %}
-      
+
       <div class="form-content form-content-grid">
         {% for campo in formulario %}
           <div class="form-group">
