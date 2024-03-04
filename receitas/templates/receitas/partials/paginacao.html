@@ -2,21 +2,21 @@
   <div class="container pagination">
     <div class="pagination-content">
       {% if escala_paginacao.primeira_pagina_fora_escala %}
-        <a href="?page=1" class="page-link page-item">1</a>
+        <a href="?page=1{{ query_adicional }}" class="page-link page-item">1</a>
         <span class="page-item">...</span>
       {% endif %}
       {% for pagina in escala_paginacao.paginacao %}
         {% if escala_paginacao.pagina_atual == pagina %}
-          <a href="?page={{ pagina }}" class="page-link page-item page-current">
+          <a href="?page={{ pagina }}{{ query_adicional }}" class="page-link page-item page-current">
         {% else %}
-          <a href="?page={{ pagina }}" class="page-link page-item">
+          <a href="?page={{ pagina }}{{ query_adicional }}" class="page-link page-item">
         {% endif %}
           {{ pagina }}
         </a>
       {% endfor %}
       {% if escala_paginacao.ultima_pagina_fora_escala %}
         <span class="page-item">...</span>
-        <a href="?page={{ escala_paginacao.total_paginas }}" class="page-link page-item">{{escala_paginacao.total_paginas}}</a>
+        <a href="?page={{ escala_paginacao.total_paginas }}{{ query_adicional }}" class="page-link page-item">{{escala_paginacao.total_paginas}}</a>
       {% endif %}
     </div>
   </div>

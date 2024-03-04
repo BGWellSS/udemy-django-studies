@@ -1,5 +1,7 @@
 import math
 
+from django.core.paginator import Paginator
+
 
 def fazer_escala_paginacao(
     escala_paginador,
@@ -32,3 +34,16 @@ def fazer_escala_paginacao(
         'primeira_pagina_fora_escala': pagina_atual > escala_intermediaria,
         'ultima_pagina_fora_escala': escala_final < total_paginas,
     }
+
+
+def fazer_paginacao(request, queryset, qtd_por_pagina=12, numero_paginas=10):
+    try:
+        pagina_atual = int(request.GET.get('page', 1))
+    except ValueError:
+        pagina_atual = 1
+    paginador = Paginator(queryset, qtd_por_pagina)
+    pagina = paginador.get_page(pagina_atual)
+
+    escala_paginacao = fazer_escala_paginacao(paginador.page_range, numero_paginas, pagina_atual)
+
+    return pagina, escala_paginacao

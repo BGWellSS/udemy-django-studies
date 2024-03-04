@@ -1,27 +1,24 @@
 # from django.http import Http404
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import Q
-from django.shortcuts import get_list_or_404, get_object_or_404, render
+import os
 
-from utils.paginacao import fazer_escala_paginacao
+from django.db.models import Q
+from django.shortcuts import render
+
+# from utils.receitas.gerador import fazer_receita
+from utils.paginacao import fazer_paginacao
 
 from .models import Receita
 
-# from utils.receitas.gerador import fazer_receita
-
-
 # Create your views here.
+
+QTD_POR_PAGINA = int(os.environ.get('QTD_POR_PAGINA', 6))
+NUMERO_PAGINACAO = int(os.environ.get('NUMERO_PAGINACAO', 10))
+
+
 def index(request):
     receitas = Receita.objects.filter(publicada=True).order_by('-id')
 
-    try:
-        pagina_atual = int(request.GET.get('page', 1))
-    except ValueError:
-        pagina_atual = 1
-    paginador = Paginator(receitas, 12)
-    pagina = paginador.get_page(pagina_atual)
-
-    escala_paginacao = fazer_escala_paginacao(paginador.page_range, 10, pagina_atual)
+    pagina, escala_paginacao = fazer_paginacao(request, receitas, QTD_POR_PAGINA, NUMERO_PAGINACAO)
 
     return render(request, 'receitas/pages/index.html', context={
         'receitas': pagina,
@@ -67,7 +64,9 @@ def categoria(request, categoria_id):
     """
     receitas = Receita.objects.filter(publicada=True, categoria__id=categoria_id).order_by('-id')
 
-    if not receitas:
+    pagina, escala_paginacao = fazer_paginacao(request, receitas, QTD_POR_PAGINA, NUMERO_PAGINACAO)
+
+    if not pagina:
         return render(request, 'receitas/pages/404.html', context={
             'titulo': f'Categoria - Não encontrada.',
         }, status=404)
@@ -75,8 +74,9 @@ def categoria(request, categoria_id):
     categoria_nome = getattr(getattr(receitas.first(), 'categoria', None), 'nome', '404 - Sem Categoria')
 
     return render(request, 'receitas/pages/categoria.html', context={
-        'receitas': receitas,
+        'receitas': pagina,
         'titulo': f'Categoria - {categoria_nome}',
+        'escala_paginacao': escala_paginacao,
     }, status=200)
 
 
@@ -92,8 +92,12 @@ def busca(request):
     else:
         receitas = None
 
+    pagina, escala_paginacao = fazer_paginacao(request, receitas, QTD_POR_PAGINA, NUMERO_PAGINACAO)
+
     return render(request, 'receitas/pages/busca.html', context={
-        'receitas': receitas,
+        'receitas': pagina,
         'titulo': f'Busca - {termo}',
+        'escala_paginacao': escala_paginacao,
         'termo': termo if termo else '🤔 Campo vazio ❌',
+        'query_adicional': f'&q={termo}',
     }, status=200)
