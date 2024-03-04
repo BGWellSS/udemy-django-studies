@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import redirect, render
 
 from .forms import CadastroForm
@@ -30,5 +31,10 @@ def cadastro_validacao(request):
     POST = request.POST
     request.session['dados_formulario_cadastro'] = POST
     formulario = CadastroForm(POST)
+
+    if formulario.is_valid():
+        formulario.save()
+        messages.success(request, 'Usuario cadastrado com sucesso!')
+        del request.session['dados_formulario_cadastro']
 
     return redirect('autores:cadastro')
