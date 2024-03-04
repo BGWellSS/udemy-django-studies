@@ -43,7 +43,8 @@ class CadastroForm(forms.ModelForm):
         add_placeholder(self.fields['email'], 'Seu e-mail')
         add_placeholder(self.fields['first_name'], 'Ex.: João')
         add_placeholder(self.fields['last_name'], 'Ex.: Silva')
-        add_placeholder(self.fields['password'], '********')
+        add_placeholder(self.fields['password'], 'Digite sua senha')
+        add_placeholder(self.fields['password_confirmacao'], 'Repita a sua senha')
 
     """
     # Exemplos de utilização de atributos
@@ -57,9 +58,34 @@ class CadastroForm(forms.ModelForm):
         ),
     )
     """
+    username = forms.CharField(
+        label='Usuário',
+        help_text=(
+            'O nome de usuário deve conter apenas letras, números ou esses caracteres @ . + - _'
+            '. O comprimento deve estar entre 4 e 150 caracteres.'
+        ),
+        error_messages={
+            'required': 'O nome de usuário é obrigatório',
+            'min_length': 'O nome de usuário deve ter pelo menos 4 caracteres',
+            'max_length': 'O nome de usuário deve ter no máximo 150 caracteres',
+        },
+        min_length=4, max_length=150,
+    )
+    first_name = forms.CharField(
+        label='Nome',
+        error_messages={'required': 'O nome é obrigatório'},
+    )
+    last_name = forms.CharField(
+        label='Sobrenome',
+        error_messages={'required': 'O sobrenome é obrigatório'},
+    )
+    email = forms.EmailField(
+        label='E-mail',
+        error_messages={'required': 'O e-mail é obrigatório'},
+        help_text='O e-mail deve ser válido',
+    )
     password = forms.CharField(
         label='Senha',
-        required=True,
         widget=forms.PasswordInput(
             attrs={'class': 'form-control', }
         ),
@@ -75,9 +101,8 @@ class CadastroForm(forms.ModelForm):
     )
     password_confirmacao = forms.CharField(
         label='Confirmação de senha',
-        required=True,
         widget=forms.PasswordInput(
-            attrs={'class': 'form-control', 'placeholder': 'Confirme sua senha'}
+            attrs={'class': 'form-control', }
         ),
     )
 
@@ -91,12 +116,13 @@ class CadastroForm(forms.ModelForm):
             'password',
         ]
         '''
-        # Exemplos de utilização de atributos do Meta
-        # Sobrescrevendo os atributos de um campo
-
         exclude = ['last_login', 'date_joined',
                     'is_superuser', 'is_staff', 'is_active',
                     'groups', 'user_permissions',]
+
+        # Exemplos de utilização de atributos do Meta
+        # Sobrescrevendo os atributos de um campo
+
         labels = {
             'username': 'Nome de usuário',
             'password': 'Senha',
@@ -130,6 +156,7 @@ class CadastroForm(forms.ModelForm):
         }
         '''
 
+    """ 
     def clean_password(self):
         data = self.cleaned_data.get('password')
 
@@ -153,6 +180,7 @@ class CadastroForm(forms.ModelForm):
             )
 
         return data
+    """
 
     def clean(self):
         cleaned_data = super().clean()

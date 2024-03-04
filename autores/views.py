@@ -33,7 +33,9 @@ def cadastro_validacao(request):
     formulario = CadastroForm(POST)
 
     if formulario.is_valid():
-        formulario.save()
+        usuario = formulario.save(commit=False)
+        usuario.set_password(usuario.password)
+        usuario.save()
         messages.success(request, 'Usuario cadastrado com sucesso!')
         del request.session['dados_formulario_cadastro']
 
