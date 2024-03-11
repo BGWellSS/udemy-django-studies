@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
+from django.utils.text import slugify
 
 '''
     O Django fornece um conjunto de classes que facilitam a criação de modelos de banco de dados.
@@ -46,3 +48,11 @@ class Receita(models.Model):
 
     def __str__(self):
         return self.titulo
+
+    def get_absolute_url(self):
+        return reverse("receitas:receita", args=(self.id,))
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = f'{slugify(self.titulo)}'
+        return super().save(*args, **kwargs)
