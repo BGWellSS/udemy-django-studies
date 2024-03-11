@@ -1,4 +1,4 @@
-{% extends "autores/base.html" %}
+{% extends "global/base.html" %}
 
 {% block titulo %}{{ titulo }}{% endblock titulo %}
 
@@ -6,46 +6,6 @@
   <div class="main-content container">
     <h2>{{ titulo }}</h2>
   </div>
-  {% include "autores/partials/mensagem.html" %}
-  <div class="main-content container">
-    <form action="{% url 'autores:validacao' %}" method="POST">
-
-      {% csrf_token %}
-
-      <div class="form-content form-content-grid">
-        {% for campo in formulario %}
-          <div class="form-group">
-            <label for="{{ campo.id_for_label }}">
-              {{ campo.label }}
-            </label>
-            {{ campo }}
-            {% if campo.help_text %}
-              <small class="help-text">
-                {{ campo.help_text }}
-              </small>
-            {% endif %}
-            {% for erro in campo.errors %}
-              <small class="form-text text-error">
-                {{ erro }}
-              </small>
-            {% endfor %}
-          </div>
-        {% endfor %}
-      </div>
-      {% if formulario.errors %}
-        <div class="form-content form-content-grid">
-          <div class="form-group">
-            <div class="message message-error">
-              Há erros no formulário, corrija-os e envie novamente.
-            </div>
-          </div>
-        </div>
-      {% endif %}
-      <div class="form-content form-content-grid">
-        <div class="form-group">
-          <button type="submit">Cadastrar</button>
-        </div>
-      </div>
-    </form>
-  </div>
+  {% include "global/partials/mensagem.html" %}
+  {% include "global/partials/formulario.html" %}
 {% endblock conteudo %}

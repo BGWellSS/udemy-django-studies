@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
+from django.urls import reverse
 
 from .forms import CadastroForm
 
@@ -20,6 +21,7 @@ def cadastro(request):
     return render(request, 'autores/pages/cadastro.html', context={
         'titulo': 'Autores - Cadastro',
         'formulario': formulario,
+        'acao_formulario': reverse('autores:validacao'),
     }, status=200)
 
 
